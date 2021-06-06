@@ -1,0 +1,49 @@
+﻿@model IEnumerable<WebsiteFPT.Models.Values>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+@section header {
+
+}
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.altributes.name)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Value)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Created_At)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.altributes.name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Value)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Created_At)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.ID_Values }) |
+                @Html.ActionLink("Details", "Details", new { id = item.ID_Values }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.ID_Values })
+            </td>
+        </tr>
+    }
+
+</table>

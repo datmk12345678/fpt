@@ -1,0 +1,43 @@
+﻿@model WebsiteFPT.Models.Values_product
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+<h2>Details</h2>
+
+<div>
+    <h4>Values_product</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.Products.Name)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Products.Name)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Values.Value)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Values.Value)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Created_At)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Created_At)
+        </dd>
+
+    </dl>
+</div>
+<p>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.ID_Values_product }) |
+    @Html.ActionLink("Back to List", "Index")
+</p>

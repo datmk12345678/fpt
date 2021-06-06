@@ -1,0 +1,143 @@
+﻿@model IEnumerable<WebsiteFPT.Models.About>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+@section header {
+
+}
+
+
+<section class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+
+            <div class="col-sm-6">
+                <h1>Danh sách Admin</h1>
+
+            </div>
+
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Home</a></li>
+                    <li class="breadcrumb-item active">About</li>
+                </ol>
+            </div>
+        </div>
+    </div><!-- /.container-fluid -->
+</section>
+<div style="margin-left:15px;">
+    @using (Html.BeginForm())
+    {
+    
+        <p>
+            Tạo sản phẩm:
+
+            <a class="btn btn-primary btn-sm" href="@Url.Action("Create")">
+                <i class="fas fa-pencil-alt">
+                </i>
+                Create
+            </a>
+
+        </p>
+    }
+</div>
+<div class="row">
+    <div class="col-12">
+        <div class="card">
+
+
+            <!-- /.card-header -->
+            <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                    <thead>
+                        <tr>
+                            <th>
+                                Name
+                            </th>
+                            <th>
+                                Description
+                            </th>
+                            <th>
+                                Status
+                            </th>
+
+                            <th>
+                                Created_At
+                            </th>
+
+                           
+                        </tr>
+                    </thead>
+                    @foreach (var item in Model)
+                    {
+                        <tbody>
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Name)
+                                </td>
+                                <td>
+                                    @Html.Raw(item.Description)
+                                </td>
+                                <td>
+                                    <div class="form-group">
+                                        <div class="custom-control custom-switch custom-switch-off-danger custom-switch-on-success">
+                                            @if (item.Status == true)
+                                            {
+                                                <input type="checkbox" class="custom-control-input" id="@item.ID_About" data-controller="Abouts" checked>
+                                                <label class="custom-control-label" for="customSwitch3">ON</label>
+                                            }
+                                            else
+                                            {
+                                                <input type="checkbox" class="custom-control-input" id="@item.ID_About" data-controller="Abouts" checked>
+                                                <label class="custom-control-label" for="customSwitch3">OFF</label>
+                                            }
+                                        </div>
+                                    </div>
+                                    
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Created_At)
+                                </td>
+
+                                <td class="project-actions text-right">
+                                    <a class="btn btn-info btn-sm" href=" @Url.Action( "Details", new { id = item.ID_About })">
+                                        <i class="fas fa-pencil-alt">
+                                        </i>
+                                        Views
+                                    </a>
+
+                                    <a class="btn btn-primary btn-sm" href="@Url.Action( "Edit", new { id = item.ID_About })">
+                                        <i class="fas fa-folder">
+                                        </i>
+                                        Edit
+                                    </a>
+                                    <a onclick="return confirm('Bạn có chắc chắn muốn xoá sản phẩm này?')" class="btn btn-danger btn-sm" href=" @Url.Action( "Delete", new { id = item.ID_About })">
+                                        <i class="fas fa-trash">
+                                        </i>
+                                        Delete
+                                    </a>
+
+                                </td>
+                            </tr>
+
+                        </tbody>
+                    }
+                </table>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+    </div>
+</div>
+
+
+<div class="card-footer clearfix">
+   
+    <p>
+
+        @Html.ActionLink("Back to List", "Index", "Products")
+    </p>
+</div>

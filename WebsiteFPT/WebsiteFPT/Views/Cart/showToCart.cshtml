@@ -1,0 +1,125 @@
+﻿@model WebsiteFPT.Models.Cart
+@{
+    ViewBag.Title = "showToCart";
+    Layout = "~/Views/Shared1/_LayoutProduct.cshtml";
+}
+
+
+<div class="account-in">
+    <div class="container">
+        <div class="check_box">
+            <div class="col-md-9 cart-items">
+                <h1>My Shopping Bag (@Html.Action("bagCart", "Cart"))</h1>
+                <script>
+                    $(document).ready(function (c) {
+                        $('.close1').on('click', function (c) {
+                            $('.cart-header').fadeOut('slow', function (c) {
+                                $('.cart-header').remove();
+                            });
+                        });
+                    });
+                </script>
+                @foreach (var item in Model.Items)
+                {
+                    double total = Convert.ToDouble(item._shopping_quantity * item._shopping_product.Prices.PromotionPrice);
+                    <div class="cart-header">
+                        <a onclick="return confirm('Bạn có chắc chắn muốn xoá sản phẩm này?')" href="/Cart/removeCart/@item._shopping_product.ID_Product"><span class="close1"></span></a>
+
+                        <div class="cart-sec simpleCart_shelfItem">
+                            <div class="cart-item cyc">
+                                <img src="@item._shopping_product.Image" class="img-responsive" alt="">
+                            </div>
+                            @using (Html.BeginForm("updateCart", "Cart"))
+                            {
+                                <div class="cart-item-info">
+
+                                    <h3><a href="#">@item._shopping_product.Name</a><span>Model No: @item._shopping_product.Code</span></h3>
+                                    <ul class="qty">
+                                        <li><p>Size : 5</p></li>
+                                        <li>
+                                            <p class="abc">
+                                                Quantity:
+                                                <input type="hidden" name="id_product" value="@Html.DisplayFor(model => item._shopping_product.ID_Product)" />
+                                                <input type="number" name="quantity" value="@Html.DisplayFor(model => item._shopping_quantity)">
+                                            </p>
+                                        </li>
+                                    </ul>
+                                    <div class="delivery">
+                                        <p>Service Charges : @Html.Action("total_money", "Cart") </p>
+                                        <input class="button item_add cbp-vm-icon cbp-vm-add" type="submit" name="updateCart" value="Upadate Cart">
+
+
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            }
+                            <div class="clearfix"></div>
+                        </div>
+
+                    </div>
+                }
+            </div>
+
+
+            <div class="clearfix"></div>
+            <div class="col-ma-3 cart-total">
+                <a class="continue" href="@Url.Action("ShowProduct", "Product")">Continue to basket</a>
+                <div class="price-details">
+                    <div class="card-body table-responsive p-0">
+                        <table class="table table-hover text-nowrap">
+                            <thead>
+                                <tr>
+                                    <th>Tên sản phẩm</th>
+                                    <th>Số lượng</th>
+                                    <th>Gía</th>
+                                </tr>
+                            </thead>
+                            @foreach (var item in Model.Items)
+                            {
+                                double total = Convert.ToDouble(item._shopping_quantity * item._shopping_product.Prices.PromotionPrice);
+                                <tbody>
+                                    <tr>
+                                        <td>@item._shopping_product.Name</td>
+                                        <td>@item._shopping_quantity</td>
+                                        <td> @total VNĐ</td>
+
+                                    </tr>
+
+                                </tbody>
+                            }
+                        </table>
+                    </div>
+                </div>
+                <div class="card-body table-responsive p-0">
+                    <table class="table table-hover text-nowrap">
+                        <thead>
+
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th>Tổng tiền</th>
+                                <td style="text-align:center">@Html.Action("bagCart", "Cart")</td>
+                                <td style="text-align:center; color:red;">@Model.total_money() VNĐ</td>
+
+                            </tr>
+
+                        </tbody>
+                    </table>
+                </div>
+
+
+
+                <div class="clearfix"></div>
+                <a href="@Url.Action("ShowCheckout","Cart")" class="button item_add cbp-vm-icon cbp-vm-add">Place Order</a>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="map">
+    <iframe src="https://www.google.com/maps/embed?pb=!1m14!1m12!1m3!1d3150859.767904157!2d-96.62081048651531!3d39.536794757966845!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!5e0!3m2!1sen!2sin!4v1408111832978"> </iframe>
+</div>
+
+
+
+

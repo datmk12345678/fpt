@@ -1,0 +1,46 @@
+﻿@model WebsiteFPT.Models.Price
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_layout.cshtml";
+}
+
+@section header {
+
+}
+
+
+    <div>
+        <h4>Price</h4>
+        <hr />
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Prices)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Prices)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.PromotionPrice)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.PromotionPrice)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.Created_At)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Created_At)
+            </dd>
+
+        </dl>
+    </div>
+    <p>
+        @Html.ActionLink("Edit", "Edit", new { id = Model.ID_Price }) |
+        @Html.ActionLink("Back to List", "Index")
+    </p>
